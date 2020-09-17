@@ -50,7 +50,7 @@ class CommandContext {
             }, listenTimeout)
             
             this.client.commands.awaitingResponses[this.command.id] = (msg) => {
-                if (responses.includes(msg.content)) {
+                if (responses.includes(msg.content) && this.command.author.id === msg.author.id && this.command.channel.id === msg.channel.id) {
                     clearTimeout(timeout);
                     this.messages.push(msg);
 
