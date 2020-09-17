@@ -1,8 +1,4 @@
-# moana
-Private Moana bot for the Oliy Island Discord server.
-
-
-## Command Framework
+## Eris Command Framework
 #### Very simple and minimal command framework, should be easily improved and added to.
 
 The framework loads commands from the ``./commands`` directory by requiring them as a module and looking for a ``.fn`` property.
