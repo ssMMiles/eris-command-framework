@@ -38,7 +38,6 @@ class CommandContext {
     awaitResponse(possibleResponses, listenTimeout = 60000) {
         return new Promise(resolve => {
             let responses = [];
-            for (let response of possibleResponses) responses.push(this.prefix + response);
 
             let gotResponse = reason => {
                 delete this.client.commands.awaitingResponses[this.command.id];
@@ -54,7 +53,7 @@ class CommandContext {
                     clearTimeout(timeout);
                     this.messages.push(msg);
 
-                    gotResponse(msg.content.substring(this.prefix.length));
+                    gotResponse(msg.content);
                     return true;
                 }
             }
