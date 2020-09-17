@@ -30,8 +30,15 @@ class CommandHandler extends EventEmitter {
                     const name = file.substring(0, file.length - 3)
                     if (this.commands[name] != null) reject(`Duplicate command name: ${name}`);
 
-                    this.commands[name] = { run: require(`${this.directory}/${file}`), filename: file };
+                    let command = require(`${this.directory}/${file}`);
+
+                    this.commands[name] = { run: command.fn, filename: file };
                     if (process.env.DEBUG === '1') console.log(`Command Handler: Registered command ${process.env.BASE_PREFIX}${name}`);
+
+                    if (command.aliases) for (let alias of command.aliases) {
+                        this.commands[alias] = { isAlias: true, run: command.fn, filename: file };
+                        if (process.env.DEBUG === '1') console.log(`Command Handler: Registered alias ${process.env.BASE_PREFIX}${alias}`);
+                    }
                 }
                 
                 this.loaded = true;
@@ -46,7 +53,7 @@ class CommandHandler extends EventEmitter {
         this.loaded = false;
 
         for (let command of Object.keys(this.commands)) {
-            delete require.cache[require.resolve(`${this.directory}/${this.commands[command].filename}`)]
+            if (!command.isAlias) delete require.cache[require.resolve(`${this.directory}/${this.commands[command].filename}`)]
             if (process.env.DEBUG === '1') console.log(`Command Handler: Unregistered command ${process.env.BASE_PREFIX}${command}`);
         }
         
