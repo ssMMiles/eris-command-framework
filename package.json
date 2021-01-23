@@ -1,26 +1,17 @@
 {
-  "name": "moana",
+  "name": "eris-command-framework",
   "version": "1.0.0",
-  "description": "Private Moana bot for the Oliy Island Discord server.",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "bufferutil": "^4.0.1",
+    "dotenv": "^8.2.0",
     "eris": "^0.13.3",
-    "dotenv": "^8.2.0"
+    "mongodb": "^3.6.3"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "debug": "DEBUG=1 node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ssMMiles/moana.git"
-  },
-  "author": "https://github.com/ssMMiles",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ssMMiles/moana/issues"
-  },
-  "homepage": "https://github.com/ssMMiles/moana#readme"
+  }
 }
